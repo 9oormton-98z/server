@@ -12,4 +12,6 @@ import java.util.List;
 public class MemberInfoAll {
     private List<SimplePlaceDto> stampList;
     private List<SimpleBadgeDto> badgeList;
+    private int stampCnt;
+    private int badgeCnt;
 }
