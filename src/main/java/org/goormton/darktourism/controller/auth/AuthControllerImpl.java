@@ -31,7 +31,7 @@ public class AuthControllerImpl implements AuthController {
         final Member member = memberService.findMemberByNickname(loginDto.getNickname());
 
         Cookie cookie = new Cookie("accessToken", member.getNickname());
-        cookie.setSecure(true);
+//        cookie.setSecure(true);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
         response.addCookie(cookie);

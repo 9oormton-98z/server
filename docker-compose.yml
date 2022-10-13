@@ -14,7 +14,7 @@ services:
   velm:
     image: hyun0404woo/jejuvelm:latest
     environment:
-      SPRING_PROFILES_ACTIVE: dev
+#      SPRING_PROFILES_ACTIVE: dev
       JAVA_OPTS: -Dspring.profiles.active=dev
     ports:
       - "8080:8080"
