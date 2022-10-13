@@ -20,5 +20,6 @@ public class PlaceDto {
     private Double longitude;
     private String address;
     private String source;
+    private boolean isVisited;
     private List<PlaceImageUrlDto> placeImageUrlDtoList;
 }

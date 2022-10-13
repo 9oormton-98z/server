@@ -14,7 +14,7 @@ public interface MemberService {
      * 있다면 해당 유저 리턴
      * 없다면 새로 생성
      */
-     Member findMemberByNickname(String nickname);
+    Member findMemberByNickname(String nickname);
 
     Member findMemberBycookie(Cookie[] cookies);
     

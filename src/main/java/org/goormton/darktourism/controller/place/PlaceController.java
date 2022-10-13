@@ -14,8 +14,8 @@ public interface PlaceController {
     /**
      * 메인 지도 열면 보이는 장소 리스트 정보 전달
      */
-    @GetMapping(value = "")
-    ResponseEntity allPlaceList();
+    @PostMapping(value = "")
+    ResponseEntity allPlaceList(@RequestBody @Valid LoginDto loginDto);
 
     /**
      * 장소 id를 통해 세부 정보 전달

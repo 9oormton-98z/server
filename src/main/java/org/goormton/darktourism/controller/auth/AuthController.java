@@ -13,7 +13,7 @@ import java.io.UnsupportedEncodingException;
 @RequestMapping("/api/v1/auth")
 public interface AuthController {
 
-    @PostMapping("/login")
+    @PostMapping(value = "/login", consumes = "application/json")
     ResponseEntity loginByNickname(
             @RequestBody @Valid LoginDto loginDto, 
             HttpServletResponse response) throws UnsupportedEncodingException;

@@ -18,9 +18,8 @@ services:
       SPRING_DATASOURCE_USERNAME: user
       SPRING_DATASOURCE_PASSWORD: 1234
       SPRING_PROFILES_ACTIVE: dev
-#      JAVA_OPTS: -Dspring.profiles.active=dev
     ports:
-      - "38080:8080"
+      - "28080:8080"
     restart: always
     entrypoint: ["bash", "-c"]
     command:

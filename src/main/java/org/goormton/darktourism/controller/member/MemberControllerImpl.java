@@ -41,7 +41,8 @@ public class MemberControllerImpl implements MemberController {
 
     @Override
     public ResponseEntity showMemberPage(LoginDto loginDto, HttpServletRequest request) {
-        final Member member = memberService.findMemberBycookie(request.getCookies());
+        
+        final Member member = memberService.findMemberByNickname(loginDto.getNickname());
 
         final Set<Place> placeByMember = 
                 placeService.findPlaceByMember(member);

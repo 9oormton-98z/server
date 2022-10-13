@@ -26,15 +26,15 @@ public class AuthControllerImpl implements AuthController {
     @Override
     public ResponseEntity loginByNickname(LoginDto loginDto, HttpServletResponse response) throws UnsupportedEncodingException {
 
-        log.info(loginDto.toString());
+        log.info(loginDto.getNickname());
         
         final Member member = memberService.findMemberByNickname(loginDto.getNickname());
 
-        Cookie cookie = new Cookie("accessToken", member.getNickname());
+//        Cookie cookie = new Cookie("accessToken", member.getNickname());
 //        cookie.setSecure(true);
-        cookie.setHttpOnly(true);
-        cookie.setPath("/");
-        response.addCookie(cookie);
+//        cookie.setHttpOnly(true);
+//        cookie.setPath("/");
+//        response.addCookie(cookie);
 
         return ResponseEntity.ok(member.getNickname());
     }

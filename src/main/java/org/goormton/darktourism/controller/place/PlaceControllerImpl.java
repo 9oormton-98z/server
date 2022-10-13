@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -33,11 +34,22 @@ public class PlaceControllerImpl implements PlaceController {
     private final PlaceToDtoMapper placeToDtoMapper;
 
     @Override
-    public ResponseEntity allPlaceList() {
-        List<SimplePlaceDto> allPlaceList = placeService.findPlaceAll().stream()
-                .map(place -> simplePlaceDtoMapper.entityToDto(place, false))
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(allPlaceList);
+    public ResponseEntity allPlaceList(LoginDto loginDto) {
+        log.info("nickname : " + loginDto.getNickname());
+        final Member member = memberService.findMemberByNickname(loginDto.getNickname());
+
+        final Set<Place> placeByMember =
+                placeService.findPlaceByMember(member);
+
+        final List<SimplePlaceDto> stampList =
+                placeService.findPlaceAll().stream()
+                        .map(p -> {
+                            boolean contains = placeByMember.contains(p);
+                            return simplePlaceDtoMapper.entityToDto(p, contains);
+                        })
+                        .collect(Collectors.toList());
+        
+        return ResponseEntity.ok(stampList);
     }
 
     @Override
@@ -53,7 +65,7 @@ public class PlaceControllerImpl implements PlaceController {
         
         final Place place = placeService.findPlaceById(placeId);
         final Member member = memberService.findMemberByNickname(loginDto.getNickname());
-
+        
 //        final Member member = memberService.findMemberBycookie(request.getCookies());
         List<Place> isInMyPlace = placeService.findPlaceByMember(member).stream()
                 .filter(p -> p.getId().equals(placeId))
@@ -65,6 +77,8 @@ public class PlaceControllerImpl implements PlaceController {
 
     @Override
     public ResponseEntity visitPlace(LoginDto loginDto, Long placeId, HttpServletRequest request) {
+
+        log.info("nickname : " + loginDto.getNickname());
         final Member member = memberService.findMemberByNickname(loginDto.getNickname());
 
 //        final Member member = memberService.findMemberBycookie(request.getCookies());
@@ -72,6 +86,6 @@ public class PlaceControllerImpl implements PlaceController {
 
         placeService.visitPlace(member, place);
         
-        return ResponseEntity.ok("VISIT SUCCESS");
+        return ResponseEntity.ok(place.getStampAfterImageUrl());
     }
 }

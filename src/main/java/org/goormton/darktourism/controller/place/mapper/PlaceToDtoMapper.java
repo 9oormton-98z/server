@@ -31,6 +31,7 @@ public class PlaceToDtoMapper {
                 place.getLongitude(),
                 place.getAddress(),
                 place.getSource(),
+                check,
                 place.getPlaceImageUrls().stream()
                         .map(placeImageUrlMapper::entityToDto)
                         .collect(Collectors.toList())
