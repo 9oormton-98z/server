@@ -2,30 +2,34 @@ package org.goormton.darktourism;
 
 import com.opencsv.CSVReader;
 import lombok.RequiredArgsConstructor;
-import org.goormton.darktourism.domain.*;
-import org.goormton.darktourism.repository.*;
+import org.goormton.darktourism.domain.Badge;
+import org.goormton.darktourism.domain.Place;
+import org.goormton.darktourism.domain.PlaceImageUrl;
+import org.goormton.darktourism.repository.BadgeRepository;
+import org.goormton.darktourism.repository.PlaceImageUrlRepository;
+import org.goormton.darktourism.repository.PlaceRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 @Component
 @RequiredArgsConstructor
 //@Profile("!test & !prod")
 public class PreProcessorDev {
-
-    private final MemberRepository memberRepository;
+    
     private final PlaceRepository placeRepository;
-    private final PlaceStarMemberRepository placeStarMemberRepository;
     private final PlaceImageUrlRepository placeImageUrlRepository;
     private final BadgeRepository badgeRepository;
+
+    private final static String PLACE_DATA = "./static/placedata.csv";
+    private final static String BADGE_DATA = "./static/badgedata.csv";
     
     @PostConstruct
     @Transactional
@@ -34,26 +38,24 @@ public class PreProcessorDev {
     }
 
     private void initData() {
-        
-        Member member = memberRepository.save(Member.createMember("98즈"));
+        savePlaceData(readCSV(PLACE_DATA));
+        saveBadgeData(readCSV(BADGE_DATA));
+    }
+    
+    private void saveBadgeData(List<List<String>> records) {
+        IntStream.range(1, records.size()).forEach(idx -> {
+            List<String> record = records.get(idx);
+            String name = record.get(0);
+            String description = record.get(1);
+            String afterImageUrl = record.get(2);
+            String prevImageUrl = record.get(3);
+            Badge badge = Badge.createBadge(name, description, idx, prevImageUrl, afterImageUrl);
+            badgeRepository.save(badge);
+            System.out.println(records.get(idx));
+        });
+    }
 
-        Badge save = badgeRepository.save(Badge.createBadge("3",
-                "3개 방문 뺴찌",
-                "https://darktourism.s3.ap-northeast-2.amazonaws.com/stamp_off/%E1%84%83%E1%85%A1%E1%84%85%E1%85%A1%E1%86%BC%E1%84%89%E1%85%B1.png",
-                "https://darktourism.s3.ap-northeast-2.amazonaws.com/stamp_on/%E1%84%83%E1%85%A1%E1%84%85%E1%85%A1%E1%86%BC%E1%84%89%E1%85%B1_on.png"
-        ));
-
-        List<List<String>> records = new ArrayList<>();
-        try (CSVReader csvReader = new CSVReader(new FileReader("./static/placedata.csv"))) {
-            String[] values = null;
-            while ((values = csvReader.readNext()) != null) {
-                records.add(Arrays.asList(values));
-            }
-            records.forEach(r -> r.forEach(System.out::println));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        
+    private void savePlaceData(List<List<String>> records) {
         records.subList(1, records.size())
                 .forEach(record -> {
                     String name = record.get(0);
@@ -78,5 +80,20 @@ public class PreProcessorDev {
                     place.addPlaceImageUrls(pi2);
                     placeRepository.save(place);
                 });
+    }
+
+    private List<List<String>> readCSV(String path) {
+        System.out.println("READ FILE PATH : " + path);
+        List<List<String>> records = new ArrayList<>();
+        try (CSVReader csvReader = new CSVReader(new FileReader(path))) {
+            String[] values = null;
+            while ((values = csvReader.readNext()) != null) {
+                records.add(Arrays.asList(values));
+            }
+            records.forEach(r -> r.forEach(System.out::println));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return records;
     }
 }
