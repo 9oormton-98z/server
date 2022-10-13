@@ -22,13 +22,14 @@ public class Badge {
     private Long id;
     private String name;
     private String description = "";
-
+    private int orderNum;
     private String badgePrevImageUrl;
     private String badgeAfterImageUrl;
 
-    private Badge(String name, String description, String badgePrevImageUrl, String badgeAfterImageUrl) {
+    private Badge(String name, String description, int orderNum, String badgePrevImageUrl, String badgeAfterImageUrl) {
         this.name = name;
         this.description = description;
+        this.orderNum = orderNum;
         this.badgePrevImageUrl = badgePrevImageUrl;
         this.badgeAfterImageUrl = badgeAfterImageUrl;
     }
@@ -36,8 +37,8 @@ public class Badge {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "badge")
     private final List<BadgeMember> badgeMembers = new ArrayList<>();
     
-    public static Badge createBadge(String name, String description, String badgePrevImageUrl, String badgeAfterImageUrl) {
-        return new Badge(name, description, badgePrevImageUrl, badgeAfterImageUrl);
+    public static Badge createBadge(String name, String description, int orderNum, String badgePrevImageUrl, String badgeAfterImageUrl) {
+        return new Badge(name, description, orderNum, badgePrevImageUrl, badgeAfterImageUrl);
     }
 
     public void addBadgeMember(BadgeMember badgeMember) {
