@@ -1,6 +1,7 @@
 package org.goormton.darktourism.controller.member;
 
 import lombok.RequiredArgsConstructor;
+import org.goormton.darktourism.controller.auth.dto.LoginDto;
 import org.goormton.darktourism.controller.badge.dto.SimpleBadgeDto;
 import org.goormton.darktourism.controller.badge.mapper.SimpleBadgeDtoMapper;
 import org.goormton.darktourism.controller.member.dto.MemberInfoAll;
@@ -13,11 +14,13 @@ import org.goormton.darktourism.service.badge.BadgeService;
 import org.goormton.darktourism.service.member.MemberService;
 import org.goormton.darktourism.service.place.PlaceService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -37,7 +40,7 @@ public class MemberControllerImpl implements MemberController {
     private final SimpleBadgeDtoMapper simpleBadgeDtoMapper;
 
     @Override
-    public ResponseEntity showMemberPage(HttpServletRequest request) {
+    public ResponseEntity showMemberPage(LoginDto loginDto, HttpServletRequest request) {
         final Member member = memberService.findMemberBycookie(request.getCookies());
 
         final Set<Place> placeByMember = 

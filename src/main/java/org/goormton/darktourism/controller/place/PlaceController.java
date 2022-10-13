@@ -1,13 +1,12 @@
 package org.goormton.darktourism.controller.place;
 
+import org.goormton.darktourism.controller.auth.dto.LoginDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 @RequestMapping("/api/v1/place")
 public interface PlaceController {
@@ -21,8 +20,9 @@ public interface PlaceController {
     /**
      * 장소 id를 통해 세부 정보 전달
      */
-    @GetMapping("/{place_id}")
+    @PostMapping("/{place_id}")
     ResponseEntity showOnePlaceDetail(
+            @RequestBody @Valid LoginDto loginDto,
             @PathVariable("place_id") Long placeId, 
             HttpServletRequest request);
 
@@ -31,6 +31,7 @@ public interface PlaceController {
      */
     @PostMapping("/visit/{place_id}")
     ResponseEntity visitPlace(
+            @RequestBody @Valid LoginDto loginDto,
             @PathVariable("place_id") Long placeId, 
             HttpServletRequest request);
     

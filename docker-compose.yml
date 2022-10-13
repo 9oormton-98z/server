@@ -14,10 +14,16 @@ services:
   velm:
     image: hyun0404woo/jejuvelm:latest
     environment:
-#      SPRING_PROFILES_ACTIVE: dev
-      JAVA_OPTS: -Dspring.profiles.active=dev
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/velm-db?useUnicode=true&serverTimezone=Asia/Seoul
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: 1234
+      SPRING_PROFILES_ACTIVE: dev
+#      JAVA_OPTS: -Dspring.profiles.active=dev
     ports:
       - "8080:8080"
+    command:
+      - |  
+        java -jar app.jar
     depends_on:
       mysql:
         condition: service_healthy
@@ -27,7 +33,7 @@ services:
     image: mysql:5.7
     platform: "linux/x86_64"
     ports:
-      - "33060:3306"
+      - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=1234
       - MYSQL_DATABASE=velm-db
