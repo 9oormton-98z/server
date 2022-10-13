@@ -12,7 +12,7 @@ services:
 #    depends_on:
 #      velm:
 #        condition: service_healthy
-  
+
   velm:
     image: hyun0404woo/jejuvelm:latest
     environment:
