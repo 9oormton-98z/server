@@ -1,0 +1,30 @@
+{
+  "stampList": [
+    {
+      "placeId": Long,
+      "name": String,
+      "shortDescription": String,
+      "stampImageUrl": String,
+      "placeImageUrl": String
+    },
+    {
+      "placeId": Long,
+      "name": String,
+      "shortDescription": String,
+      "stampImageUrl": String,
+      "placeImageUrl": String
+    }
+  ],
+  "badgeList": [
+    {
+      "badgeId": Long,
+      "description": String,
+      "badgeImageUrl": String
+    },
+    {
+      "badgeId": Long,
+      "description": String,
+      "badgeImageUrl": String
+    }
+  ]
+}

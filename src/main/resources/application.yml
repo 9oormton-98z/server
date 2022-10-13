@@ -1,1 +1,54 @@
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/Desktop/Dev/prod/goormton/goormton
+    username: sa
+    password: 1234
+    driver-class-name: org.h2.Driver
+    hikari:
+      initialization-fail-timeout: 60000
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    logging.level:
+      org.hibernate.SQL: debug
+  sql:
+    init:
+      mode: always
+  profiles:
+    group:
+      dev: "dev"
+      prod: "prod"
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+#cloud:
+#  aws:
+#    region:
+#      static: ap-northeast-2
+#    stack:
+#      auto: false
 
+management.endpoint.health.show-details: "ALWAYS"
+management.endpoints.web.exposure.include: "*"
+---
+spring:
+  config:
+    activate:
+      on-profile: "dev"
+    import: mysql-datasource.yml
+  jpa:
+    hibernate:
+      ddl-auto: create
+    logging.level:
+      org.hibernate.SQL: debug
+
+---
+spring:
+  config:
+    activate:
+      on-profile: "prod"
+    import: mysql-datasource.yml
+  jpa:
+    hibernate:
+      ddl-auto: create

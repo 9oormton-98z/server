@@ -1,0 +1,24 @@
+{
+  "placeId": Long,
+  "name" : String,
+  "description" : String,
+  "shortDescription" : String,
+  "stampImageUrl" : String,
+  "starSum": double,
+  "visitorNumber":int,
+  "starAvg": double,
+  "latitude": double,
+  "longitude": double,
+  "address": String,
+  "source": String,
+  "placeImageUrlDtoList": [
+    {
+      "orderNum": int,
+      "imageUrl": String
+    },
+    {
+      "orderNum": int,
+      "imageUrl": String
+    }
+  ]
+}

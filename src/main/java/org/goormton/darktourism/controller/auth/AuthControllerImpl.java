@@ -1,6 +1,7 @@
 package org.goormton.darktourism.controller.auth;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.goormton.darktourism.controller.auth.dto.LoginDto;
 import org.goormton.darktourism.domain.Member;
 import org.goormton.darktourism.service.member.MemberService;
@@ -15,6 +16,7 @@ import java.nio.charset.StandardCharsets;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 public class AuthControllerImpl implements AuthController {
@@ -24,11 +26,14 @@ public class AuthControllerImpl implements AuthController {
     @Override
     public ResponseEntity loginByNickname(LoginDto loginDto, HttpServletResponse response) throws UnsupportedEncodingException {
 
-        final Member member = memberService.findMemberByNickname(loginDto);
+        log.info(loginDto.toString());
+        
+        final Member member = memberService.findMemberByNickname(loginDto.getNickname());
 
-        Cookie cookie = new Cookie("accessToken", URLEncoder.encode(member.getNickname(), UTF_8));
+        Cookie cookie = new Cookie("accessToken", member.getNickname());
         cookie.setSecure(true);
         cookie.setHttpOnly(true);
+        cookie.setPath("/");
         response.addCookie(cookie);
 
         return ResponseEntity.ok(member.getNickname());

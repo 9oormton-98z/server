@@ -1,0 +1,19 @@
+[
+  {
+    "placeId": Long,
+    "name": String,
+    "shortDescription": String,
+    "stampImageUrl": String,
+    "placeImageUrl": String
+  },
+  {
+    "placeId": Long,
+    "name": String,
+    "shortDescription": String,
+    "stampImageUrl": String,
+    "placeImageUrl": String
+  }
+  
+  ...
+  
+]

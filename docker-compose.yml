@@ -1,0 +1,40 @@
+version: '2.4'
+
+services:
+#  nginx:
+#    image: nginx:1.21.1
+#    volumes:
+#      - /home/ubuntu/velm/nginx.conf:/etc/nginx/nginx.conf
+##      - /home/ubuntu/velm:/data/build
+#    ports:
+#      - 80:80
+#    depends_on:
+#      - velm
+  
+  velm:
+    image: hyun0404woo/jejuvelm:latest
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      JAVA_OPTS: -Dspring.profiles.active=dev
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    
+  # $ mysql -uroot -h127.0.0.1 -p
+  mysql:
+    image: mysql:5.7
+    platform: "linux/x86_64"
+    ports:
+      - "33060:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=velm-db
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=1234
+    healthcheck:
+      test: "/usr/bin/mysql -uuser -p1234 --execute \"SHOW DATABASES;\""
+      interval: 10s
+      timeout: 5s
+      retries: 10

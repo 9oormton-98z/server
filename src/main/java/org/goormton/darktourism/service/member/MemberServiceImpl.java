@@ -20,8 +20,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public Member findMemberByNickname(LoginDto loginDto) {
-        final String nickname = loginDto.getNickname();
+    public Member findMemberByNickname(String nickname) {
         return memberRepository.findMemberByNickname(nickname)
                 .orElseGet(() -> 
                     memberRepository.save(Member.createMember(nickname)));
