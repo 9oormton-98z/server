@@ -20,7 +20,7 @@ services:
       SPRING_PROFILES_ACTIVE: dev
 #      JAVA_OPTS: -Dspring.profiles.active=dev
     ports:
-      - "8080:8080"
+      - "38080:8080"
     restart: always
     entrypoint: ["bash", "-c"]
     command:
@@ -41,6 +41,9 @@ services:
       - MYSQL_DATABASE=velm-db
       - MYSQL_USER=user
       - MYSQL_PASSWORD=1234
+    command:
+      - --character-set-server=utf8
+      - --collation-server=utf8_general_ci
     healthcheck:
       test: "/usr/bin/mysql -uuser -p1234 --execute \"SHOW DATABASES;\""
       interval: 10s
