@@ -1,5 +1,6 @@
 package org.goormton.darktourism.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,10 +20,12 @@ public class PlaceStarMember {
 
     private Double star = 0.0;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "place_id")
     private Place place;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
@@ -30,9 +33,10 @@ public class PlaceStarMember {
     private PlaceStarMember(Place place, Member member) {
         this.place = place;
         this.member = member;
+        this.star = 0.0;
     }
 
-    public static PlaceStarMember createBadgeMember(Place place, Member member) {
+    public static PlaceStarMember createPlaceStarMember(Place place, Member member) {
         return new PlaceStarMember(place, member);
     }
 }

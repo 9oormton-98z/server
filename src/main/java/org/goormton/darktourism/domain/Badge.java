@@ -1,7 +1,6 @@
 package org.goormton.darktourism.domain;
 
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -21,22 +20,24 @@ public class Badge {
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "badge_id")
     private Long id;
-
     private String name;
-
     private String description = "";
 
-    private Badge(String name, String description) {
+    private String badgePrevImageUrl;
+    private String badgeAfterImageUrl;
+
+    private Badge(String name, String description, String badgePrevImageUrl, String badgeAfterImageUrl) {
         this.name = name;
         this.description = description;
+        this.badgePrevImageUrl = badgePrevImageUrl;
+        this.badgeAfterImageUrl = badgeAfterImageUrl;
     }
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "badge")
     private final List<BadgeMember> badgeMembers = new ArrayList<>();
-
     
-    public static Badge createBadge(String name, String description) {
-        return new Badge(name, description);
+    public static Badge createBadge(String name, String description, String badgePrevImageUrl, String badgeAfterImageUrl) {
+        return new Badge(name, description, badgePrevImageUrl, badgeAfterImageUrl);
     }
 
     public void addBadgeMember(BadgeMember badgeMember) {

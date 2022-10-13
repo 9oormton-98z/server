@@ -1,12 +1,10 @@
 package org.goormton.darktourism.domain;
 
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +20,9 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
 
+    @Column(unique = true)
     private String nickname;
 
-    private String password;
     private Double point = 0.0;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "member")
@@ -33,13 +31,12 @@ public class Member {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "member")
     private final List<PlaceStarMember> placeStarMembers = new ArrayList<>();
 
-    private Member(String nickname, String password) {
+    private Member(String nickname) {
         this.nickname = nickname;
-        this.password = password;
     }
 
-    public Member createMember(String nickname, String password) {
-        return new Member(nickname, password);
+    public static Member createMember(String nickname) {
+        return new Member(nickname);
     }
 
     public void addPoint(Double addPoint) {

@@ -1,6 +1,5 @@
 package org.goormton.darktourism.domain;
 
-import io.micrometer.core.lang.Nullable;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,31 +21,46 @@ public class Place {
     private Long id;
 
     private String name;
-
+    private String shortDescription = "";
+    @Column(columnDefinition = "LONGTEXT")
     private String description = "";
-
+    private String stampPrevImageUrl;
+    private String stampAfterImageUrl;
     private Double starSum = 0.0;
-
     private int visitorNumber = 0;
-
     private Double starAvg = 0.0;
-
     private Double latitude;
-
     private Double longitude;
+    private String address;
+    private String source;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "place")
     private final List<PlaceStarMember> placeStarMembers = new ArrayList<>();
 
-    private Place(String name, String description, Double latitude, Double longitude) {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "place")
+    private final List<PlaceImageUrl> placeImageUrls = new ArrayList<>();
+
+    private Place(
+            String name, String shortDescription, String description, String stampPrevImageUrl, String stampAfterImageUrl, Double latitude, Double longitude, String address, String source) {
         this.name = name;
+        this.shortDescription = shortDescription;
         this.description = description;
+        this.stampPrevImageUrl = stampPrevImageUrl;
+        this.stampAfterImageUrl = stampAfterImageUrl;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.address = address;
+        this.source = source;
     }
 
-    public static Place createPlace(String name, String description, Double latitude, Double longitude) {
-        return new Place(name, description, latitude, longitude);
+    public static Place createPlace(
+            String name, String shortDescription, String description, String stampPrevImageUrl, String stampAfterImageUrl, Double latitude, Double longitude, String address, String source) {
+        return new Place(name, shortDescription, description, stampPrevImageUrl, stampAfterImageUrl, latitude, longitude, address, source);
+    }
+
+    public Place addPlaceImageUrls(PlaceImageUrl placeImageUrl) {
+        this.placeImageUrls.add(placeImageUrl);
+        return this;
     }
     
     public Place visitPlace(PlaceStarMember placeStarMember) {
