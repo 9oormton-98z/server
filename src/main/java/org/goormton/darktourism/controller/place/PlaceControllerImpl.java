@@ -9,6 +9,7 @@ import org.goormton.darktourism.controller.place.mapper.PlaceToDtoMapper;
 import org.goormton.darktourism.controller.place.mapper.SimplePlaceDtoMapper;
 import org.goormton.darktourism.domain.Member;
 import org.goormton.darktourism.domain.Place;
+import org.goormton.darktourism.service.badge.BadgeService;
 import org.goormton.darktourism.service.member.MemberService;
 import org.goormton.darktourism.service.place.PlaceService;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,7 @@ public class PlaceControllerImpl implements PlaceController {
 
     private final PlaceService placeService;
     private final MemberService memberService;
+    private final BadgeService badgeService;
     private final SimplePlaceDtoMapper simplePlaceDtoMapper;
     private final PlaceToDtoMapper placeToDtoMapper;
 
@@ -54,19 +56,10 @@ public class PlaceControllerImpl implements PlaceController {
 
     @Override
     public ResponseEntity showOnePlaceDetail(LoginDto loginDto, Long placeId, HttpServletRequest request) {
-//        Arrays.stream(request.getCookies()).forEach(c ->
-//                log.info(c.getName() + " : " + c.getValue())
-//        );
-        
-//        String nicknameToken = request.getHeader("Authorization");
-//        String nickname = nicknameToken.split(" ")[1];
-//
-//        log.info("Nickname header : " + nickname);
-        
+
         final Place place = placeService.findPlaceById(placeId);
         final Member member = memberService.findMemberByNickname(loginDto.getNickname());
         
-//        final Member member = memberService.findMemberBycookie(request.getCookies());
         List<Place> isInMyPlace = placeService.findPlaceByMember(member).stream()
                 .filter(p -> p.getId().equals(placeId))
                 .collect(Collectors.toList());
@@ -77,15 +70,15 @@ public class PlaceControllerImpl implements PlaceController {
 
     @Override
     public ResponseEntity visitPlace(LoginDto loginDto, Long placeId, HttpServletRequest request) {
-
         log.info("nickname : " + loginDto.getNickname());
         final Member member = memberService.findMemberByNickname(loginDto.getNickname());
-
-//        final Member member = memberService.findMemberBycookie(request.getCookies());
         final Place place = placeService.findPlaceById(placeId);
-
         placeService.visitPlace(member, place);
-        
+
+        Set<Place> placeByMember = placeService.findPlaceByMember(member);
+
+        badgeService.earnNewBadge(member, placeByMember.size());
+
         return ResponseEntity.ok(place.getStampAfterImageUrl());
     }
 }
