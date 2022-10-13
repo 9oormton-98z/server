@@ -5,13 +5,13 @@ services:
     image: nginx:1.21.1
     volumes:
       - /home/ubuntu/velm/server/nginx.conf:/etc/nginx/nginx.conf
-#      - /home/ubuntu/velm/client:/data/build
+      - /home/ubuntu/velm/front:/data/build
     ports:
       - "80:80"
     restart: always
-    depends_on:
-      velm:
-        condition: service_healthy
+#    depends_on:
+#      velm:
+#        condition: service_healthy
   
   velm:
     image: hyun0404woo/jejuvelm:latest
@@ -28,7 +28,7 @@ services:
       - |  
         java -Dspring.profiles.active=dev -jar app.jar
     healthcheck:
-      test: curl --fail http://localhost:8080/actuator/health/ || exit 1
+      test: "curl --fail http://localhost:8080/actuator/health/ || exit 1"
       interval: 10s
       timeout: 5s
       retries: 10
