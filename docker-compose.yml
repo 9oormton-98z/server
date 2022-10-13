@@ -21,6 +21,8 @@ services:
 #      JAVA_OPTS: -Dspring.profiles.active=dev
     ports:
       - "8080:8080"
+    restart: always
+    entrypoint: ["bash", "-c"]
     command:
       - |  
         java -jar app.jar
