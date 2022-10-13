@@ -5,7 +5,7 @@ services:
     image: nginx:1.21.1
     volumes:
       - /home/ubuntu/velm/server/nginx.conf:/etc/nginx/nginx.conf
-#      - /home/ubuntu/velm:/data/build
+#      - /home/ubuntu/velm/client:/data/build
     ports:
       - "80:80"
     restart: always
@@ -47,9 +47,9 @@ services:
       - MYSQL_DATABASE=velm-db
       - MYSQL_USER=user
       - MYSQL_PASSWORD=1234
-#    command:
-#      - --character-set-server=utf8
-#      - --collation-server=utf8_general_ci
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
     healthcheck:
       test: "/usr/bin/mysql -uuser -p1234 --execute \"SHOW DATABASES;\""
       interval: 10s

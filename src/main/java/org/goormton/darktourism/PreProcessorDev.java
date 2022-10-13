@@ -51,7 +51,6 @@ public class PreProcessorDev {
             String prevImageUrl = record.get(3);
             Badge badge = Badge.createBadge(name, description, idx, prevImageUrl, afterImageUrl);
             badgeRepository.save(badge);
-            System.out.println(records.get(idx));
         });
     }
 
