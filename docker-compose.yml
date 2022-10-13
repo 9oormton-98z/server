@@ -9,9 +9,9 @@ services:
     ports:
       - "80:80"
     restart: always
-    depends_on:
-      velm:
-        condition: service_healthy
+#    depends_on:
+#      velm:
+#        condition: service_healthy
   
   velm:
     image: hyun0404woo/jejuvelm:latest
@@ -28,7 +28,7 @@ services:
       - |  
         java -Dspring.profiles.active=dev -jar app.jar
     healthcheck:
-      test: "curl http://localhost:8080/actuator/health/ || exit 1"
+      test: curl --fail http://localhost:8080/actuator/health/ || exit 1
       interval: 10s
       timeout: 5s
       retries: 10
