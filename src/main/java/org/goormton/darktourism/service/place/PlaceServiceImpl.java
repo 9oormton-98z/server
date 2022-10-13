@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.goormton.darktourism.domain.Member;
 import org.goormton.darktourism.domain.Place;
 import org.goormton.darktourism.domain.PlaceStarMember;
-import org.goormton.darktourism.exception.member.MemberNotFoundException;
+import org.goormton.darktourism.exception.badge.PlaceAlreadyVisitedException;
 import org.goormton.darktourism.exception.place.PlaceNotFoundException;
 import org.goormton.darktourism.repository.MemberRepository;
 import org.goormton.darktourism.repository.PlaceRepository;
@@ -22,7 +22,6 @@ public class PlaceServiceImpl implements PlaceService {
 
     private final PlaceRepository placeRepository;
     private final PlaceStarMemberRepository placeStarMemberRepository;
-    private final MemberRepository memberRepository;
 
     @Override
     public List<Place> findPlaceAll() {
@@ -52,9 +51,16 @@ public class PlaceServiceImpl implements PlaceService {
     @Override
     @Transactional
     public Place visitPlace(Member member, Place place) {
-        PlaceStarMember placeStarMember = 
-                PlaceStarMember.createPlaceStarMember(place, member);
-        placeStarMemberRepository.save(placeStarMember);
+        List<PlaceStarMember> visitList = 
+                placeStarMemberRepository.findPlaceStarMemberByMemberAndPlace(member, place);
+
+        if (!visitList.isEmpty()) {
+            throw new PlaceAlreadyVisitedException();
+        }
+
+        PlaceStarMember placeStarMember = placeStarMemberRepository.save(
+                PlaceStarMember.createPlaceStarMember(place, member)
+        );
         return place.visitPlace(placeStarMember);
     }
 }

@@ -4,11 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.goormton.darktourism.domain.Badge;
 import org.goormton.darktourism.domain.BadgeMember;
 import org.goormton.darktourism.domain.Member;
-import org.goormton.darktourism.domain.PlaceStarMember;
 import org.goormton.darktourism.repository.BadgeMemberRepository;
 import org.goormton.darktourism.repository.BadgeRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -36,11 +36,15 @@ public class BadgeServiceImpl implements BadgeService {
     }
 
     @Override
-    public void earnNewBadge(Member member, String badgeName) {
-        return;
-//        Badge badge = badgeRepository.findBadgeByName(badgeName)
-//                .orElseThrow();
-//        BadgeMember.createBadgeMember(member, badge)
-//        badgeMemberRepository.save(badge)
+    @Transactional
+    public void earnNewBadge(Member member, int stampCnt) {
+        int idx = stampCnt / 3;
+        if (stampCnt % 3 != 0) {
+            return;
+        }
+        Badge badge = badgeRepository.findBadgeByOrderNum(idx)
+                .orElseThrow();
+        BadgeMember badgeMember = BadgeMember.createBadgeMember(badge, member);
+        badgeMemberRepository.save(badgeMember);
     }
 }

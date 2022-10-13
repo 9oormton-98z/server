@@ -12,5 +12,5 @@ public interface BadgeService {
 
     Set<Badge> findBadgeByMember(Member member);
 
-    void earnNewBadge(Member member, String badgeName);
+    void earnNewBadge(Member member, int stampCnt);
 }
