@@ -1,4 +1,4 @@
-package org.goormton.darktourism.exception.Member;
+package org.goormton.darktourism.exception.member;
 
 import org.goormton.darktourism.exception.BasicException;
 import org.springframework.web.bind.annotation.ResponseStatus;
