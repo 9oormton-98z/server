@@ -17,9 +17,9 @@ jobs:
           distribution: "temurin"
 
       - name: Checkout main branch
-          uses: actions/checkout@v3
-          with:
-            ref: main
+        uses: actions/checkout@v3
+        with:
+          ref: main
 
       - name: Grant execute permission for gradlew
         shell: bash
