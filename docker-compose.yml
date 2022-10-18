@@ -43,6 +43,8 @@ services:
   mysql:
     image: mysql:5.7
     platform: "linux/x86_64"
+    volumes:
+      - /home/ubuntu/velu/data:/var/lib/mysql
     ports:
       - "3306:3306"
     environment:
