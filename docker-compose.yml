@@ -12,9 +12,9 @@ services:
       - "80:80"
       - "443:443"
     restart: always
-#    depends_on:
-#      velm:
-#        condition: service_healthy
+    depends_on:
+      velm:
+        condition: service_healthy
 
   velm:
     image: hyun0404woo/jejuvelm:latest
