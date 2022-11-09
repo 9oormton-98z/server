@@ -1,10 +1,9 @@
-package org.goormton.darktourism.repository;
+package org.goormton.darktourism.repository.badge;
 
-import org.goormton.darktourism.domain.Badge;
+import org.goormton.darktourism.domain.badge.Badge;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @Repository

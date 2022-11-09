@@ -1,7 +1,7 @@
 package org.goormton.darktourism.controller.badge.mapper;
 
 import org.goormton.darktourism.controller.badge.dto.SimpleBadgeDto;
-import org.goormton.darktourism.domain.Badge;
+import org.goormton.darktourism.domain.badge.Badge;
 import org.springframework.stereotype.Component;
 
 @Component

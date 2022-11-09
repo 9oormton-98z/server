@@ -1,7 +1,7 @@
 package org.goormton.darktourism.service.badge;
 
-import org.goormton.darktourism.domain.Badge;
-import org.goormton.darktourism.domain.Member;
+import org.goormton.darktourism.domain.badge.Badge;
+import org.goormton.darktourism.domain.member.Member;
 
 import java.util.List;
 import java.util.Set;

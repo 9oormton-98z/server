@@ -1,14 +1,13 @@
 package org.goormton.darktourism.service.place;
 
 import lombok.RequiredArgsConstructor;
-import org.goormton.darktourism.domain.Member;
-import org.goormton.darktourism.domain.Place;
-import org.goormton.darktourism.domain.PlaceStarMember;
+import org.goormton.darktourism.domain.member.Member;
+import org.goormton.darktourism.domain.place.Place;
+import org.goormton.darktourism.domain.place.PlaceStarMember;
 import org.goormton.darktourism.exception.badge.PlaceAlreadyVisitedException;
 import org.goormton.darktourism.exception.place.PlaceNotFoundException;
-import org.goormton.darktourism.repository.MemberRepository;
-import org.goormton.darktourism.repository.PlaceRepository;
-import org.goormton.darktourism.repository.PlaceStarMemberRepository;
+import org.goormton.darktourism.repository.place.PlaceRepository;
+import org.goormton.darktourism.repository.place.PlaceStarMemberRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
