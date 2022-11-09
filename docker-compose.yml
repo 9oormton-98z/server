@@ -4,32 +4,32 @@ services:
   nginx:
     image: nginx:1.21.1
     volumes:
-      - /etc/letsencrypt/live/jejuvelue.link/fullchain.pem:/etc/letsencrypt/live/jejuvelue.link/fullchain.pem
-      - /etc/letsencrypt/live/jejuvelue.link/privkey.pem:/etc/letsencrypt/live/jejuvelue.link/privkey.pem
-      - /home/ubuntu/velm/server/nginx.conf:/etc/nginx/nginx.conf
-      - /home/ubuntu/velm/front:/data/build
+      - /home/azureuser/jeju/server/nginx.conf:/etc/nginx/nginx.conf
+      - /home/azureuser/jeju/front/out:/data/build
+#      - /etc/letsencrypt/live/jejuvelue.link/fullchain.pem:/etc/letsencrypt/live/jejuvelue.link/fullchain.pem
+#      - /etc/letsencrypt/live/jejuvelue.link/privkey.pem:/etc/letsencrypt/live/jejuvelue.link/privkey.pem
     ports:
       - "80:80"
       - "443:443"
     restart: always
 #    depends_on:
-#      velm:
+#      velue:
 #        condition: service_healthy
 
-  velm:
+  velue:
     image: hyun0404woo/jejuvelm:latest
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/velm-db?useUnicode=true&serverTimezone=Asia/Seoul
       SPRING_DATASOURCE_USERNAME: user
       SPRING_DATASOURCE_PASSWORD: 1234
-#      SPRING_PROFILES_ACTIVE: dev
+      SPRING_PROFILES_ACTIVE: dev
     ports:
       - "8080:8080"
     restart: always
-    entrypoint: ["bash", "-c"]
-    command:
-      - |  
-        java -Dspring.profiles.active=dev -jar app.jar
+#    entrypoint: ["bash", "-c"]
+#    command:
+#      - |  
+#        java -Dspring.profiles.active=dev -jar app.jar
     healthcheck:
       test: "curl --fail --silent localhost:8080/actuator/health | grep UP | exit 1"
       interval: 10s
@@ -44,7 +44,7 @@ services:
     image: mysql:5.7
     platform: "linux/x86_64"
     volumes:
-      - /home/ubuntu/velu/data:/var/lib/mysql
+      - /home/azureuser/jeju/data:/var/lib/mysql
     ports:
       - "3306:3306"
     environment:

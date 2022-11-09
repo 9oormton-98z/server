@@ -11,3 +11,5 @@ COPY static/badgedata.csv /HOME/spring/static/badgedata.csv
 WORKDIR /HOME/spring/
 
 EXPOSE 8080
+
+CMD ["bash", "-c", "java -jar ./app.jar"]
