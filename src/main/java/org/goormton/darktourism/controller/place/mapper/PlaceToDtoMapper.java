@@ -2,7 +2,7 @@ package org.goormton.darktourism.controller.place.mapper;
 
 import lombok.RequiredArgsConstructor;
 import org.goormton.darktourism.controller.place.dto.PlaceDto;
-import org.goormton.darktourism.domain.Place;
+import org.goormton.darktourism.domain.place.Place;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;

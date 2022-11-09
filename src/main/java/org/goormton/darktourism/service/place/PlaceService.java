@@ -1,7 +1,7 @@
 package org.goormton.darktourism.service.place;
 
-import org.goormton.darktourism.domain.Member;
-import org.goormton.darktourism.domain.Place;
+import org.goormton.darktourism.domain.member.Member;
+import org.goormton.darktourism.domain.place.Place;
 
 import java.util.List;
 import java.util.Set;

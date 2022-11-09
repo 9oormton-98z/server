@@ -1,4 +1,4 @@
-package org.goormton.darktourism.domain;
+package org.goormton.darktourism.domain.place;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;

@@ -2,12 +2,12 @@ package org.goormton.darktourism;
 
 import com.opencsv.CSVReader;
 import lombok.RequiredArgsConstructor;
-import org.goormton.darktourism.domain.Badge;
-import org.goormton.darktourism.domain.Place;
-import org.goormton.darktourism.domain.PlaceImageUrl;
-import org.goormton.darktourism.repository.BadgeRepository;
-import org.goormton.darktourism.repository.PlaceImageUrlRepository;
-import org.goormton.darktourism.repository.PlaceRepository;
+import org.goormton.darktourism.domain.badge.Badge;
+import org.goormton.darktourism.domain.place.Place;
+import org.goormton.darktourism.domain.place.PlaceImageUrl;
+import org.goormton.darktourism.repository.badge.BadgeRepository;
+import org.goormton.darktourism.repository.place.PlaceImageUrlRepository;
+import org.goormton.darktourism.repository.place.PlaceRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,11 +1,11 @@
 package org.goormton.darktourism.service.badge;
 
 import lombok.RequiredArgsConstructor;
-import org.goormton.darktourism.domain.Badge;
-import org.goormton.darktourism.domain.BadgeMember;
-import org.goormton.darktourism.domain.Member;
-import org.goormton.darktourism.repository.BadgeMemberRepository;
-import org.goormton.darktourism.repository.BadgeRepository;
+import org.goormton.darktourism.domain.badge.Badge;
+import org.goormton.darktourism.domain.badge.BadgeMember;
+import org.goormton.darktourism.domain.member.Member;
+import org.goormton.darktourism.repository.badge.BadgeMemberRepository;
+import org.goormton.darktourism.repository.badge.BadgeRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
