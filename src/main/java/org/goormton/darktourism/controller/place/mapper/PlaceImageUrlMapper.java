@@ -1,7 +1,7 @@
 package org.goormton.darktourism.controller.place.mapper;
 
 import org.goormton.darktourism.controller.place.dto.PlaceImageUrlDto;
-import org.goormton.darktourism.domain.PlaceImageUrl;
+import org.goormton.darktourism.domain.place.PlaceImageUrl;
 import org.springframework.stereotype.Component;
 
 @Component

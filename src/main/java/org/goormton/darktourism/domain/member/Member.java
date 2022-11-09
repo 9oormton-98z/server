@@ -1,8 +1,10 @@
-package org.goormton.darktourism.domain;
+package org.goormton.darktourism.domain.member;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.goormton.darktourism.domain.badge.BadgeMember;
+import org.goormton.darktourism.domain.place.PlaceStarMember;
 
 import javax.persistence.*;
 import java.util.ArrayList;

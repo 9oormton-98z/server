@@ -1,4 +1,4 @@
-package org.goormton.darktourism.domain;
+package org.goormton.darktourism.domain.badge;
 
 import lombok.AccessLevel;
 import lombok.Builder;

@@ -1,7 +1,7 @@
 package org.goormton.darktourism.controller.place.mapper;
 
 import org.goormton.darktourism.controller.place.dto.SimplePlaceDto;
-import org.goormton.darktourism.domain.Place;
+import org.goormton.darktourism.domain.place.Place;
 import org.springframework.stereotype.Component;
 
 import static org.goormton.darktourism.asset.Default.NO_CONTENT_IMAGE_URL;

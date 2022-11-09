@@ -2,10 +2,9 @@ package org.goormton.darktourism.service.member;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.goormton.darktourism.controller.auth.dto.LoginDto;
-import org.goormton.darktourism.domain.Member;
+import org.goormton.darktourism.domain.member.Member;
 import org.goormton.darktourism.exception.member.MemberNotFoundException;
-import org.goormton.darktourism.repository.MemberRepository;
+import org.goormton.darktourism.repository.member.MemberRepository;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;

@@ -1,11 +1,9 @@
 package org.goormton.darktourism.service.member;
 
 
-import org.goormton.darktourism.controller.auth.dto.LoginDto;
-import org.goormton.darktourism.domain.Member;
+import org.goormton.darktourism.domain.member.Member;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 
 public interface MemberService {
 

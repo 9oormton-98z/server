@@ -1,4 +1,4 @@
-package org.goormton.darktourism.domain;
+package org.goormton.darktourism.domain.place;
 
 import lombok.AccessLevel;
 import lombok.Getter;
