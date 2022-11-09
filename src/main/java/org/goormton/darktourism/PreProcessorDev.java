@@ -49,7 +49,13 @@ public class PreProcessorDev {
             String description = record.get(1);
             String afterImageUrl = record.get(2);
             String prevImageUrl = record.get(3);
-            Badge badge = Badge.createBadge(name, description, idx, prevImageUrl, afterImageUrl);
+            Badge badge = Badge.builder()
+                    .name(name)
+                    .description(description)
+                    .orderNum(idx)
+                    .badgePrevImageUrl(prevImageUrl)
+                    .badgeAfterImageUrl(afterImageUrl)
+                    .build();
             badgeRepository.save(badge);
         });
     }
