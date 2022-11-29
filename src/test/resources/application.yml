@@ -12,3 +12,6 @@ spring:
     properties:
       hibernate:
         show_sql: true
+jwt:
+  access-secret: test
+  refresh-secret: test

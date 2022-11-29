@@ -22,6 +22,7 @@ public class Place {
 
     private String name;
     private String shortDescription = "";
+
     @Column(columnDefinition = "LONGTEXT")
     private String description = "";
     private String stampPrevImageUrl;
@@ -62,7 +63,7 @@ public class Place {
         this.placeImageUrls.add(placeImageUrl);
         return this;
     }
-    
+
     public Place visitPlace(PlaceStarMember placeStarMember) {
         this.placeStarMembers.add(placeStarMember);
         this.visitorNumber += 1;
