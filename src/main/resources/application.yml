@@ -1,6 +1,7 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/Desktop/Dev/prod/goormton/goormton
+#    url: jdbc:h2:tcp://localhost/~/Desktop/Dev/prod/goormton/goormton
+    url: jdbc:h2:file:./build/data/testdb
     username: sa
     password: 1234
     driver-class-name: org.h2.Driver
@@ -20,14 +21,12 @@ spring:
       prod: "prod"
   servlet:
     multipart:
-      max-file-size: 100MB
-      max-request-size: 100MB
-#cloud:
-#  aws:
-#    region:
-#      static: ap-northeast-2
-#    stack:
-#      auto: false
+      max-file-size: 10MB
+      max-request-size: 20MB
+
+jwt:
+  access-secret: ajhdflashdflhasdkjfhasjdhfasdfasfasdfasdfasdfawef
+  refresh-secret: ajhdflashdflhasdkjfhasjdhfasdfasfasdfasdfasdfawef
 
 management.endpoint.health.show-details: "ALWAYS"
 management.endpoints.web.exposure.include: "*"

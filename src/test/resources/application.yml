@@ -13,5 +13,5 @@ spring:
       hibernate:
         show_sql: true
 jwt:
-  access-secret: test
-  refresh-secret: test
+  access-secret: testtesttesttesttesttesttesttesttesttesttesttesttesttest
+  refresh-secret: testtesttesttesttesttesttesttesttesttesttesttesttesttest
