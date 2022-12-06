@@ -1,7 +1,7 @@
 package org.goormton.darktourism.controller.member;
 
 import lombok.RequiredArgsConstructor;
-import org.goormton.darktourism.controller.auth.dto.LoginDto;
+import org.goormton.darktourism.controller.auth.dto.SimpleLoginDto;
 import org.goormton.darktourism.controller.badge.dto.SimpleBadgeDto;
 import org.goormton.darktourism.controller.badge.mapper.SimpleBadgeDtoMapper;
 import org.goormton.darktourism.controller.member.dto.MemberInfoAll;
@@ -36,9 +36,9 @@ public class MemberControllerImpl implements MemberController {
     private final SimpleBadgeDtoMapper simpleBadgeDtoMapper;
 
     @Override
-    public ResponseEntity showMemberPage(LoginDto loginDto, HttpServletRequest request) {
+    public ResponseEntity showMemberPage(SimpleLoginDto simpleLoginDto, HttpServletRequest request) {
         
-        final Member member = memberService.findMemberByNickname(loginDto.getNickname());
+        final Member member = memberService.findMemberByNickname(simpleLoginDto.getNickname());
 
         final Set<Place> placeByMember = 
                 placeService.findPlaceByMember(member);

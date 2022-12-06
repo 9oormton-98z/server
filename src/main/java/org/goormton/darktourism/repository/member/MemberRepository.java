@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
     @Transactional(readOnly = true)
-    Optional<Member> findMemberByNickname(String nickname);
+    Optional<Member> findMemberByUsername(String username);
     
 }
