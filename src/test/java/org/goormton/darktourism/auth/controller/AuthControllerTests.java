@@ -63,12 +63,6 @@ public class AuthControllerTests {
         memberRepository.save(admin);
     }
 
-//    @AfterEach
-//    void tearDown() {
-//        memberRepository.deleteAll();
-//        memberRoleRepository.deleteAll();
-//    }
-
     @Test
     void 로그인_성공_테스트() throws Exception {
         LoginRequestDto loginRequestDto = new LoginRequestDto(TEST_NICKNAME, "pw");
@@ -144,5 +138,4 @@ public class AuthControllerTests {
 
         return new Tuple(accessToken, refreshToken);
     }
-    
 }

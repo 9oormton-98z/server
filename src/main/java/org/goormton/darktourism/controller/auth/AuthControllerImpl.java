@@ -46,6 +46,7 @@ public class AuthControllerImpl implements AuthController {
                 .getValue();
 
         final LoginToken loginToken = authService.reIssueTokens(refreshToken);
+  
         addRefreshTokenInCookie(loginToken.getRefreshToken(), response);
 
         return ResponseEntity.ok(new LoginResponseDto(loginToken.getAccessToken()));
