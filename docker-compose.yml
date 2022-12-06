@@ -6,6 +6,7 @@ services:
     volumes:
       - /home/azureuser/jeju/server/nginx.conf:/etc/nginx/nginx.conf
       - /home/azureuser/jeju/front/out:/data/build
+      - /home/azureuser/jeju/static:/data/static
 #      - /etc/letsencrypt/live/jejuvelue.link/fullchain.pem:/etc/letsencrypt/live/jejuvelue.link/fullchain.pem
 #      - /etc/letsencrypt/live/jejuvelue.link/privkey.pem:/etc/letsencrypt/live/jejuvelue.link/privkey.pem
     ports:
