@@ -11,6 +11,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Slf4j
@@ -37,10 +39,11 @@ public class SecurityConfig {
                 .formLogin().disable()
                 .httpBasic().disable()
                 .authorizeRequests()
-//                .antMatchers("/static/**", "api/**").permitAll()
+                .antMatchers(GET, "/static/**").permitAll()
+                .antMatchers(POST, "/api/**/auth/login").permitAll()
+                .antMatchers(POST, "/api/**/auth/refresh").permitAll()
                 .antMatchers( "/api/**/admin").access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/api/**/admin/login").permitAll()
-                .antMatchers(HttpMethod.GET).permitAll()
+//                .antMatchers(HttpMethod.GET).permitAll()
                 .anyRequest().permitAll();
 
         return http.build();
