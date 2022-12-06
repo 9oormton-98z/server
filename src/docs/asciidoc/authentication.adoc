@@ -1,0 +1,48 @@
+ifndef::snippets[]
+:snippets: ./build/generated-snippets
+endif::[]
+
+= TEST API
+:icons: font 
+// NOTE, TIP, WARNING, CAUTION, IMPORTANT 같은 경고구들 아이콘화 해줌
+:toc: left
+:toclevels: 1
+:sectlinks:
+:toc-title: test api
+
+== *LOGIN API*
+
+=== REQUEST
+
+include::{snippets}/authentication-login/http-request.adoc[]
+
+=== REQUEST FIELD
+
+include::{snippets}/authentication-login/request-fields.adoc[]
+
+=== RESPONSE
+
+include::{snippets}/authentication-login/http-response.adoc[]
+
+=== RESPONSE FIELD
+
+include::{snippets}/authentication-login/response-body.adoc[]
+
+
+== *REFRESH API*
+
+=== REQUEST
+
+include::{snippets}/authentication-refresh/http-request.adoc[]
+
+=== REQUEST FIELD
+
+// include::{snippets}/authentication-refresh/request-fields.adoc[]
+
+=== RESPONSE
+
+include::{snippets}/authentication-refresh/http-response.adoc[]
+
+=== RESPONSE FIELD
+
+include::{snippets}/authentication-refresh/response-body.adoc[]

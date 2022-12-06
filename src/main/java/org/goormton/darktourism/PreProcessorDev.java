@@ -3,11 +3,16 @@ package org.goormton.darktourism;
 import com.opencsv.CSVReader;
 import lombok.RequiredArgsConstructor;
 import org.goormton.darktourism.domain.badge.Badge;
+import org.goormton.darktourism.domain.member.Member;
+import org.goormton.darktourism.domain.member.MemberRole;
 import org.goormton.darktourism.domain.place.Place;
 import org.goormton.darktourism.domain.place.PlaceImageUrl;
 import org.goormton.darktourism.repository.badge.BadgeRepository;
+import org.goormton.darktourism.repository.member.MemberRepository;
+import org.goormton.darktourism.repository.member.MemberRoleRepository;
 import org.goormton.darktourism.repository.place.PlaceImageUrlRepository;
 import org.goormton.darktourism.repository.place.PlaceRepository;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,12 +26,14 @@ import java.util.stream.IntStream;
 
 @Component
 @RequiredArgsConstructor
-//@Profile("!test & !prod")
+@Profile("!test & !prod")
 public class PreProcessorDev {
     
     private final PlaceRepository placeRepository;
     private final PlaceImageUrlRepository placeImageUrlRepository;
     private final BadgeRepository badgeRepository;
+    private final MemberRoleRepository memberRoleRepository;
+    private final MemberRepository memberRepository;
 
     private final static String PLACE_DATA = "./static/placedata.csv";
     private final static String BADGE_DATA = "./static/badgedata.csv";
@@ -40,6 +47,16 @@ public class PreProcessorDev {
     private void initData() {
         savePlaceData(readCSV(PLACE_DATA));
         saveBadgeData(readCSV(BADGE_DATA));
+        createMemberRole();
+    }
+
+    private void createMemberRole() {
+        MemberRole role_member = new MemberRole("ROLE_MEMBER");
+        MemberRole role_admin = new MemberRole("ROLE_ADMIN");
+        memberRoleRepository.save(role_member);
+        memberRoleRepository.save(role_admin);
+        Member admin = Member.createMember("admin", role_admin);
+        memberRepository.save(admin);
     }
     
     private void saveBadgeData(List<List<String>> records) {

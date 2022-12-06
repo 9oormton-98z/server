@@ -38,3 +38,5 @@ out/
 
 ## data ##
 #/static
+/src/main/resources/static
+.env

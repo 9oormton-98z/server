@@ -2,7 +2,7 @@ package org.goormton.darktourism.controller.place;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.goormton.darktourism.controller.auth.dto.LoginDto;
+import org.goormton.darktourism.controller.auth.dto.SimpleLoginDto;
 import org.goormton.darktourism.controller.place.dto.SimplePlaceDto;
 import org.goormton.darktourism.controller.place.mapper.PlaceToDtoMapper;
 import org.goormton.darktourism.controller.place.mapper.SimplePlaceDtoMapper;
@@ -31,9 +31,9 @@ public class PlaceControllerImpl implements PlaceController {
     private final PlaceToDtoMapper placeToDtoMapper;
 
     @Override
-    public ResponseEntity allPlaceList(LoginDto loginDto) {
-        log.info("nickname : " + loginDto.getNickname());
-        final Member member = memberService.findMemberByNickname(loginDto.getNickname());
+    public ResponseEntity allPlaceList(SimpleLoginDto simpleLoginDto) {
+        log.info("nickname : " + simpleLoginDto.getNickname());
+        final Member member = memberService.findMemberByNickname(simpleLoginDto.getNickname());
 
         final Set<Place> placeByMember =
                 placeService.findPlaceByMember(member);
@@ -50,10 +50,10 @@ public class PlaceControllerImpl implements PlaceController {
     }
 
     @Override
-    public ResponseEntity showOnePlaceDetail(LoginDto loginDto, Long placeId, HttpServletRequest request) {
+    public ResponseEntity showOnePlaceDetail(SimpleLoginDto simpleLoginDto, Long placeId, HttpServletRequest request) {
 
         final Place place = placeService.findPlaceById(placeId);
-        final Member member = memberService.findMemberByNickname(loginDto.getNickname());
+        final Member member = memberService.findMemberByNickname(simpleLoginDto.getNickname());
         
         List<Place> isInMyPlace = placeService.findPlaceByMember(member).stream()
                 .filter(p -> p.getId().equals(placeId))
@@ -64,9 +64,9 @@ public class PlaceControllerImpl implements PlaceController {
     }
 
     @Override
-    public ResponseEntity visitPlace(LoginDto loginDto, Long placeId, HttpServletRequest request) {
-        log.info("nickname : " + loginDto.getNickname());
-        final Member member = memberService.findMemberByNickname(loginDto.getNickname());
+    public ResponseEntity visitPlace(SimpleLoginDto simpleLoginDto, Long placeId, HttpServletRequest request) {
+        log.info("nickname : " + simpleLoginDto.getNickname());
+        final Member member = memberService.findMemberByNickname(simpleLoginDto.getNickname());
         final Place place = placeService.findPlaceById(placeId);
         placeService.visitPlace(member, place);
 

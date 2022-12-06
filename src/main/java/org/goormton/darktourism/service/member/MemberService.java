@@ -1,7 +1,8 @@
 package org.goormton.darktourism.service.member;
 
-
+import org.goormton.darktourism.controller.auth.dto.LoginRequestDto;
 import org.goormton.darktourism.domain.member.Member;
+import org.goormton.darktourism.service.auth.dto.LoginToken;
 
 import javax.servlet.http.Cookie;
 
@@ -14,6 +15,8 @@ public interface MemberService {
      */
     Member findMemberByNickname(String nickname);
 
-    Member findMemberBycookie(Cookie[] cookies);
+    Member findMemberByCookie(Cookie[] cookies);
+
+    LoginToken createLoginToken(LoginRequestDto loginRequestDto);
     
 }
