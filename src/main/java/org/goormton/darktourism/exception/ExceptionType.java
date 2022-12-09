@@ -18,7 +18,12 @@ public enum ExceptionType {
 
     // PLACE
     PLACE_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 장소를 찾을 수 없습니다."),
-    PLACE_ALREADY_VISITED(HttpStatus.BAD_REQUEST, "이미 방문한 장소입니다.");
+    PLACE_ALREADY_VISITED(HttpStatus.BAD_REQUEST, "이미 방문한 장소입니다."),
+    
+    // FILE
+    FILE_TYPE_NOT_ALLOW(HttpStatus.NOT_ACCEPTABLE, "유효한 확장자가 아닙니다."),
+    
+    ;
 
     private final HttpStatus httpStatus;
     private final String detail;

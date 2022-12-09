@@ -3,10 +3,8 @@ package org.goormton.darktourism.controller.member;
 import lombok.RequiredArgsConstructor;
 import org.goormton.darktourism.controller.auth.dto.SimpleLoginDto;
 import org.goormton.darktourism.controller.badge.dto.SimpleBadgeDto;
-import org.goormton.darktourism.controller.badge.mapper.SimpleBadgeDtoMapper;
 import org.goormton.darktourism.controller.member.dto.MemberInfoAll;
 import org.goormton.darktourism.controller.place.dto.SimplePlaceDto;
-import org.goormton.darktourism.controller.place.mapper.SimplePlaceDtoMapper;
 import org.goormton.darktourism.domain.badge.Badge;
 import org.goormton.darktourism.domain.member.Member;
 import org.goormton.darktourism.domain.place.Place;
@@ -31,10 +29,6 @@ public class MemberControllerImpl implements MemberController {
 
     private final BadgeService badgeService;
 
-    private final SimplePlaceDtoMapper simplePlaceDtoMapper;
-
-    private final SimpleBadgeDtoMapper simpleBadgeDtoMapper;
-
     @Override
     public ResponseEntity showMemberPage(SimpleLoginDto simpleLoginDto, HttpServletRequest request) {
         
@@ -50,7 +44,7 @@ public class MemberControllerImpl implements MemberController {
                 placeService.findPlaceAll().stream()
                         .map(place -> {
                             boolean contains = placeByMember.contains(place);
-                            return simplePlaceDtoMapper.entityToDto(place, contains);
+                            return SimplePlaceDto.entityToDto(place, contains);
                         })
                         .collect(Collectors.toList());
 
@@ -58,7 +52,7 @@ public class MemberControllerImpl implements MemberController {
                 badgeService.findBadgeAll().stream()
                         .map(badge -> {
                             boolean contains = badgeByMember.contains(badge);
-                            return simpleBadgeDtoMapper.entityToDto(badge, contains);
+                            return SimpleBadgeDto.entityToDto(badge, contains);
                         })
                         .collect(Collectors.toList());
 
