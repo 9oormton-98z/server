@@ -89,9 +89,10 @@ public class Place {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "place")
     private final List<PlaceImageUrl> placeImageUrls = new ArrayList<>();
 
-    @Builder
+    @Builder(builderClassName = "defaultBuilder")
     public Place(
             String name, String shortDescription, String description, String stampPrevImageUrl, String stampAfterImageUrl, Double latitude, Double longitude, String address, String source) {
+        System.out.println("name = " + name);
         this.name = name;
         this.shortDescription = shortDescription;
         this.description = description;
@@ -103,8 +104,9 @@ public class Place {
         this.source = source;
     }
 
-    @Builder(builderMethodName = "dtoBuilder")
+    @Builder(builderClassName = "dtoBuilderClass", builderMethodName = "dtoBuilder")
     public Place(CreatePlaceRequestDto request) {
+        System.out.println("request = " + request);
         this.name = request.getName();
         this.shortDescription = request.getShortDescription();
         this.description = request.getDescription();
@@ -130,5 +132,26 @@ public class Place {
         this.starSum += placeStarMember.getStar();
         this.starAvg = starSum / (double) visitorNumber;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Place{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", shortDescription='" + shortDescription + '\'' +
+                ", description='" + description + '\'' +
+                ", stampPrevImageUrl='" + stampPrevImageUrl + '\'' +
+                ", stampAfterImageUrl='" + stampAfterImageUrl + '\'' +
+                ", starSum=" + starSum +
+                ", visitorNumber=" + visitorNumber +
+                ", starAvg=" + starAvg +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", address='" + address + '\'' +
+                ", source='" + source + '\'' +
+                ", placeStarMembers=" + placeStarMembers +
+                ", placeImageUrls=" + placeImageUrls +
+                '}';
     }
 }

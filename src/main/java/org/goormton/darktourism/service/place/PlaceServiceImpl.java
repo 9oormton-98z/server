@@ -1,12 +1,14 @@
 package org.goormton.darktourism.service.place;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.goormton.darktourism.controller.place.dto.CreatePlaceRequestDto;
 import org.goormton.darktourism.domain.member.Member;
 import org.goormton.darktourism.domain.place.Place;
+import org.goormton.darktourism.domain.place.PlaceImageUrl;
 import org.goormton.darktourism.domain.place.PlaceStarMember;
 import org.goormton.darktourism.exception.badge.PlaceAlreadyVisitedException;
 import org.goormton.darktourism.exception.place.PlaceNotFoundException;
@@ -76,11 +78,30 @@ public class PlaceServiceImpl implements PlaceService {
     @Transactional
     public void createOnePlace(String request, List<MultipartFile> files) throws JsonProcessingException {
         CreatePlaceRequestDto createPlaceRequestDto = objectMapper.readValue(request, CreatePlaceRequestDto.class);
+        System.out.println("createPlaceRequestDto = " + createPlaceRequestDto);
         
         final List<String> filePathList = files.stream()
+                .filter(f -> f.getSize() != 0)
                 .map(imageFileUploader::upload)
                 .collect(Collectors.toList());
-        
-        
+
+        Place newPlace = Place.dtoBuilder()
+                .request(createPlaceRequestDto)
+                .build();
+
+        System.out.println("newPlace = " + newPlace);
+
+        for(int i = 0; i < filePathList.size(); i++){
+            PlaceImageUrl placeImageUrl = PlaceImageUrl.builder()
+                    .place(newPlace)
+                    .imageUrl(filePathList.get(i))
+                    .orderNum(i)
+                    .build();
+            newPlace.addPlaceImageUrls(placeImageUrl);
+        }
+
+        System.out.println("newPlace2 = " + newPlace);
+
+        placeRepository.save(newPlace);
     }
 }

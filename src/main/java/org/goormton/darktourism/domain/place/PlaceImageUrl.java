@@ -2,6 +2,7 @@ package org.goormton.darktourism.domain.place;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,6 +25,7 @@ public class PlaceImageUrl {
 
     private int orderNum;
 
+    @Builder
     private PlaceImageUrl(Place place, String imageUrl, int orderNum) {
         this.place = place;
         this.imageUrl = imageUrl;

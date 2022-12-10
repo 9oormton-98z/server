@@ -39,11 +39,11 @@ public class SecurityConfig {
                 .formLogin().disable()
                 .httpBasic().disable()
                 .authorizeRequests()
-                .antMatchers(GET, "/static/**").permitAll()
+//                .antMatchers(GET, "/static/**").permitAll()
                 .antMatchers(POST, "/api/**/auth/login").permitAll()
                 .antMatchers(POST, "/api/**/auth/refresh").permitAll()
                 .antMatchers( "/api/**/admin").access("hasRole('ROLE_ADMIN')")
-//                .antMatchers(HttpMethod.GET).permitAll()
+                .antMatchers(GET).permitAll()
                 .anyRequest().permitAll();
 
         return http.build();
