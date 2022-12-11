@@ -49,7 +49,7 @@ spring:
 
 static:
   place-image-path: ./static/
-  place-data-path: ./static/data/placedata.csv
+  place-data-path: ./static/predata/placedata.csv
 
 ---
 spring:
