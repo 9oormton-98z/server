@@ -19,6 +19,7 @@ spring:
     group:
       dev: "dev"
       prod: "prod"
+      test: "test"
   servlet:
     multipart:
       max-file-size: 10MB
