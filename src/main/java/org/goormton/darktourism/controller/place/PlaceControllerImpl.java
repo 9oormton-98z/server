@@ -3,9 +3,8 @@ package org.goormton.darktourism.controller.place;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.goormton.darktourism.controller.auth.dto.SimpleLoginDto;
+import org.goormton.darktourism.controller.place.dto.PlaceDto;
 import org.goormton.darktourism.controller.place.dto.SimplePlaceDto;
-import org.goormton.darktourism.controller.place.mapper.PlaceToDtoMapper;
-import org.goormton.darktourism.controller.place.mapper.SimplePlaceDtoMapper;
 import org.goormton.darktourism.domain.member.Member;
 import org.goormton.darktourism.domain.place.Place;
 import org.goormton.darktourism.service.badge.BadgeService;
@@ -27,8 +26,6 @@ public class PlaceControllerImpl implements PlaceController {
     private final PlaceService placeService;
     private final MemberService memberService;
     private final BadgeService badgeService;
-    private final SimplePlaceDtoMapper simplePlaceDtoMapper;
-    private final PlaceToDtoMapper placeToDtoMapper;
 
     @Override
     public ResponseEntity allPlaceList(SimpleLoginDto simpleLoginDto) {
@@ -42,7 +39,7 @@ public class PlaceControllerImpl implements PlaceController {
                 placeService.findPlaceAll().stream()
                         .map(p -> {
                             boolean contains = placeByMember.contains(p);
-                            return simplePlaceDtoMapper.entityToDto(p, contains);
+                            return SimplePlaceDto.entityToDto(p, contains);
                         })
                         .collect(Collectors.toList());
         
@@ -60,7 +57,7 @@ public class PlaceControllerImpl implements PlaceController {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(
-                placeToDtoMapper.entityToDto(place, !isInMyPlace.isEmpty()));
+                PlaceDto.entityToDto(place, !isInMyPlace.isEmpty()));
     }
 
     @Override
