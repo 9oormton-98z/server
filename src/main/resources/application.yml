@@ -2,6 +2,8 @@ spring:
   datasource:
     url: jdbc:h2:tcp://localhost/~/Desktop/Dev/prod/goormton/goormton
 #    url: jdbc:h2:file:./build/data/testdb
+#    url: jdbc:h2:tcp://localhost/~/Desktop/Dev/prod/goormton/goormton
+    url: jdbc:h2:file:./build/data/testdb
     username: sa
     password: 1234
     driver-class-name: org.h2.Driver
@@ -30,6 +32,7 @@ jwt:
 
 static:
   place-image-path: ./src/main/resources/static/placeimage/
+  place-data-path: ./src/main/resources/static/predata/placedata.csv
 
 management.endpoint.health.show-details: "ALWAYS"
 management.endpoints.web.exposure.include: "*"
@@ -48,6 +51,7 @@ spring:
 
 static:
   place-image-path: ./static/
+  place-data-path: ./static/data/placedata.csv
 
 ---
 spring:

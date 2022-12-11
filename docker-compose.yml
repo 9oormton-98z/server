@@ -19,6 +19,9 @@ services:
 
   velue:
     image: hyun0404woo/jejuvelm:latest
+    volumes:
+      - /home/azureuser/jeju/static/docs:/static/docs
+      - /home/azureuser/jeju/static/predata:/static/predata
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/velm-db?useUnicode=true&serverTimezone=Asia/Seoul
       SPRING_DATASOURCE_USERNAME: user
