@@ -12,6 +12,7 @@ import org.goormton.darktourism.repository.member.MemberRepository;
 import org.goormton.darktourism.repository.member.MemberRoleRepository;
 import org.goormton.darktourism.repository.place.PlaceImageUrlRepository;
 import org.goormton.darktourism.repository.place.PlaceRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,9 +25,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
+@Profile("dev")
 @Component
 @RequiredArgsConstructor
-@Profile("!test & !prod")
 public class PreProcessorDev {
     
     private final PlaceRepository placeRepository;
@@ -35,8 +36,9 @@ public class PreProcessorDev {
     private final MemberRoleRepository memberRoleRepository;
     private final MemberRepository memberRepository;
 
-    private final static String PLACE_DATA = "./static/placedata.csv";
-    private final static String BADGE_DATA = "./static/badgedata.csv";
+    @Value("${static.place-data-path}")
+    private String PLACE_DATA;
+//    private final static String BADGE_DATA = "static/data/badgedata.csv";
     
     @PostConstruct
     @Transactional
@@ -46,7 +48,7 @@ public class PreProcessorDev {
 
     private void initData() {
         savePlaceData(readCSV(PLACE_DATA));
-        saveBadgeData(readCSV(BADGE_DATA));
+//        saveBadgeData(readCSV(BADGE_DATA));
         createMemberRole();
     }
 

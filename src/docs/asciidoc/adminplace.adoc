@@ -1,0 +1,21 @@
+ifndef::snippets[]
+:snippets: ./build/generated-snippets
+endif::[]
+
+= ADMIN PLACE API
+:icons: font 
+// NOTE, TIP, WARNING, CAUTION, IMPORTANT 같은 경고구들 아이콘화 해줌
+:toc: left
+:toclevels: 1
+:sectlinks:
+:toc-title: admin api
+
+== *CREATE ONE PLACE API*
+
+=== REQUEST
+
+include::{snippets}/admin-place-api/http-request.adoc[]
+
+=== RESPONSE
+
+include::{snippets}/admin-place-api/http-response.adoc[]

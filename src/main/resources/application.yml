@@ -19,6 +19,7 @@ spring:
     group:
       dev: "dev"
       prod: "prod"
+      test: "test"
   servlet:
     multipart:
       max-file-size: 10MB
@@ -28,8 +29,13 @@ jwt:
   access-secret: ajhdflashdflhasdkjfhasjdhfasdfasfasdfasdfasdfawef
   refresh-secret: ajhdflashdflhasdkjfhasjdhfasdfasfasdfasdfasdfawef
 
+static:
+  place-image-path: ./src/main/resources/static/placeimage/
+  place-data-path: ./src/main/resources/static/predata/placedata.csv
+
 management.endpoint.health.show-details: "ALWAYS"
 management.endpoints.web.exposure.include: "*"
+
 ---
 spring:
   config:
@@ -42,6 +48,10 @@ spring:
     logging.level:
       org.hibernate.SQL: debug
 
+static:
+  place-image-path: ./static/
+  place-data-path: ./static/predata/placedata.csv
+
 ---
 spring:
   config:
@@ -50,4 +60,7 @@ spring:
     import: mysql-datasource.yml
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
+      
+static:
+  place-image-path: ./static/
